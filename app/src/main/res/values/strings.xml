@@ -3,4 +3,12 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="login">Login</string>
+
+    <plurals name="questions">
+        <item quantity="one">>%1$d Question</item>
+        <item quantity="other">%1$d Questions</item>
+    </plurals>
+
+    <string name="no_inspections">No Inspections Found.</string>
+
 </resources>
