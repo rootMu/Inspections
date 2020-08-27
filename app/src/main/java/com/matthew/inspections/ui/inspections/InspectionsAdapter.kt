@@ -1,6 +1,7 @@
 package com.matthew.inspections.ui.inspections
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -14,13 +15,17 @@ import com.matthew.inspections.ui.inspections.uiModel.UiEmpty
 import com.matthew.inspections.ui.inspections.uiModel.UiInspection
 import com.matthew.inspections.ui.inspections.uiModel.UiTitle
 
-class InspectionsAdapter :
+class InspectionsAdapter(private val listener: InspectionListener) :
     ListAdapter<InspectionUiModel, BaseViewHolder<*>>(DiffCallback()) {
 
     companion object {
         const val TYPE_EMPTY = 0
         const val TYPE_TITLE = 1
         const val TYPE_INSPECTION = 2
+    }
+
+    interface InspectionListener {
+        fun onClickedInspection(inspectionId: Int)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -81,9 +86,18 @@ class InspectionsAdapter :
     }
 
     inner class InspectionViewHolder(private val binding: ItemInspectionBinding) :
-        BaseViewHolder<UiInspection>(binding.root) {
+        BaseViewHolder<UiInspection>(binding.root), View.OnClickListener {
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
         override fun bind(item: UiInspection) {
             binding.inspection = item
+        }
+
+        override fun onClick(view: View) {
+            listener.onClickedInspection(binding.inspection!!.id)
         }
     }
 

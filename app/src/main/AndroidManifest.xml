@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.inspections.InspectionsActivity"/>
+        <activity android:name=".ui.inspectionDetail.InspectionDetailActivity"/>
     </application>
 
 </manifest>
