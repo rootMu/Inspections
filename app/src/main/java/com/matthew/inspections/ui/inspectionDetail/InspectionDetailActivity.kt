@@ -19,8 +19,9 @@ class InspectionDetailActivity : AppCompatActivity() {
             this,
             R.layout.activity_inspection_detail
         )
-        binding.viewModel = viewModel.apply{
-            binding.inspectionDetail =  retrieveInspection(intent.getIntExtra(INSPECTION_ID, -1))
+        binding.viewModel = viewModel.apply {
+            retrieveInspection(intent.getIntExtra(INSPECTION_ID, -1))
         }
+        binding.lifecycleOwner = this
     }
 }

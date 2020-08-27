@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.matthew.inspections.ui.inspections.viewmodel.InspectionsViewModel"/>
 
         <variable
             name="pagerAdapter"
             type="com.matthew.inspections.ui.inspections.InspectionsPagerAdapter" />
+
     </data>
 
     <LinearLayout
@@ -29,10 +27,10 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"
-            app:adapter="@{pagerAdapter}"
-            app:tabLayout="@{tabLayout}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:adapter="@{pagerAdapter}"
+            app:tabLayout="@{tabLayout}" />
 
     </LinearLayout>
 
