@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.matthew.inspections.ui.inspections.viewmodel.InspectionsViewModel" />
+            type="com.matthew.inspections.ui.inspections.viewmodel.InspectionsViewModel"/>
 
         <variable
             name="position"
-            type="int" />
+            type="int"/>
+
+        <import type="com.matthew.inspections.R"/>
 
     </data>
 
@@ -24,9 +25,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:adapter="@{viewModel.adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:submitInspectionList="@{viewModel.getInspectionsUiData(position)}" />
+            app:adapter="@{viewModel.adapter}"
+            app:submitInspectionList="@{viewModel.getInspectionsUiData(position)}"/>
 
     </LinearLayout>
 

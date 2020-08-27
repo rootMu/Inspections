@@ -2,7 +2,6 @@ package com.matthew.inspections.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
     }
 
-    private fun LoginAction.handleAction() = when(this){
+    private fun LoginAction.handleAction(): Any = when(this){
         LoginAction.LOGIN_SUCCESSFUL -> {
             startActivity(Intent(applicationContext, InspectionsActivity::class.java))
             finish()

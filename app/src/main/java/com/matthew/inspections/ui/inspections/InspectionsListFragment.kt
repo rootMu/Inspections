@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.matthew.inspections.databinding.FragmentInspectionsListBinding
 import com.matthew.inspections.ui.inspections.viewmodel.InspectionsViewModel
 import com.matthew.inspections.util.autoCleared
+import androidx.lifecycle.Observer
 
 class InspectionsListFragment : Fragment() {
 
@@ -32,10 +33,10 @@ class InspectionsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInspectionsListBinding.inflate(inflater, container, false)
-        arguments?.getInt(ARG_POSITION)?.let{
-            binding.position = it
+        binding.position = arguments?.getInt(ARG_POSITION,0)!!
+        binding.viewModel = viewModel.apply{
+            launchDetailActivity.observe(viewLifecycleOwner, Observer { value -> (activity as InspectionsActivity).launchDetailActivity(value) })
         }
-        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

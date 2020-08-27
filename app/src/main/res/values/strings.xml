@@ -3,6 +3,7 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="login">Login</string>
+    <string name="not_applicable">Not Applicable</string>
 
     <plurals name="questions">
         <item quantity="one">>%1$d Question</item>
