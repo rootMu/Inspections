@@ -1,28 +1,20 @@
 package com.matthew.inspections.user
 
+import com.matthew.inspections.room.data.LocalAuthorisation
+
 data class User(
     val id: Int,
     val groups: List<Int>,
     val inspections: List<Int>,
     val authorisation: Authorisation,
-    val localAuthorisation: Authorisation
+    val localAuthorisation: LocalAuthorisation
 )
 
 data class Authorisation(
-    val authorised: Boolean,
-    val validationDate: String?,
-    val expiryDate: String?,
-    val token: String?,
-    val errorResponse: String?
-)
-
-/**
- * Room class for local authorisation
- * only saved once server authorisation
- * has been received
- * TODO() make more secure
- */
-data class LocalAuthorisation(
-    val userName: String,
-    val password: String
+    val authorised: Boolean = false,
+    val userId: Int = 0,
+    val validationDate: String? = null,
+    val expiryDate: String? = null,
+    val token: String? = null,
+    val errorResponse: String? = null
 )

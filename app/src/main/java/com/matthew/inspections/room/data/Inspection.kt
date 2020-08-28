@@ -9,9 +9,9 @@ data class Inspection(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo(name = "inspectionId") var inspectionId: Int = 0,
     @ColumnInfo(name = "areaId") var areaId: Int = 0,
-    @ColumnInfo(name = "name") val name: String = "",
-    @ColumnInfo(name = "status") val status: InspectionStatus = InspectionStatus.UNKNOWN,
-    @ColumnInfo(name = "date") val date: OffsetDateTime = OffsetDateTime.now()
+    @ColumnInfo(name = "name") var name: String = "",
+    @ColumnInfo(name = "status") var status: InspectionStatus = InspectionStatus.UNKNOWN,
+    @ColumnInfo(name = "date") var date: OffsetDateTime = OffsetDateTime.now()
 )
 
 data class InspectionWithQuestions(

@@ -1,4 +1,4 @@
-package com.matthew.inspections
+package com.matthew.inspections.dagger.modules
 
 import android.content.Context
 import android.net.ConnectivityManager
