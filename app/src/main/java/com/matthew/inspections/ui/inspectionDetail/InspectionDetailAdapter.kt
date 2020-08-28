@@ -1,24 +1,16 @@
 package com.matthew.inspections.ui.inspectionDetail
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.matthew.inspections.R
-import com.matthew.inspections.data.Answer
-import com.matthew.inspections.data.Question
 import com.matthew.inspections.databinding.*
 import com.matthew.inspections.ui.inspectionDetail.uiModel.InspectionDetailUiModel
 import com.matthew.inspections.ui.inspectionDetail.uiModel.UiAnswer
 import com.matthew.inspections.ui.inspectionDetail.uiModel.UiQuestion
 import com.matthew.inspections.ui.inspections.BaseViewHolder
-import com.matthew.inspections.ui.inspections.InspectionsAdapter
-import com.matthew.inspections.ui.inspections.uiModel.InspectionUiModel
-import com.matthew.inspections.ui.inspections.uiModel.UiEmpty
-import com.matthew.inspections.ui.inspections.uiModel.UiInspection
-import com.matthew.inspections.ui.inspections.uiModel.UiTitle
 
 class InspectionDetailAdapter :
     ListAdapter<InspectionDetailUiModel, BaseViewHolder<*>>(DiffCallback()) {

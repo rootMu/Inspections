@@ -1,5 +1,5 @@
 package com.matthew.inspections.ui.inspections.uiModel
 
-import java.util.*
+import java.time.OffsetDateTime
 
-class UiInspection(override val name: String, val numberOfQuestions: Int, val completeBy: Date, val id: Int) : InspectionUiModel
+class UiInspection(override val name: String, val numberOfQuestions: Int, val date: OffsetDateTime, val id: Int) : InspectionUiModel
