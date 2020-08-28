@@ -24,23 +24,29 @@ class LoginActivity : AppCompatActivity() {
             this,
             R.layout.activity_login
         )
-        binding.viewModel = viewModel.apply{
+        binding.viewModel = viewModel.apply {
             handleLoginAction.observe(this@LoginActivity,
-                Observer<LoginAction?> { action -> action?.handleAction() })
+                Observer { attempt -> attempt?.handleAction() })
         }
         binding.lifecycleOwner = this
     }
 
-    private fun LoginAction.handleAction(): Any = when(this){
+    private fun LoginAttempt.handleAction(): Any = when(action) {
         LoginAction.LOGIN_SUCCESSFUL -> {
             startActivity(Intent(applicationContext, InspectionsActivity::class.java))
             finish()
         }
-        LoginAction.INVALID_USERNAME_OR_PASSWORD -> {
+        LoginAction.INVALID_USERNAME_OR_PASSWORD ->
             AlertDialog.Builder(this@LoginActivity).apply {
                 setTitle("Unable To Login")
-                setMessage("Username Or Password are incorrect")
+                setMessage(authorisation.errorResponse?:"Username Or Password are incorrect")
             }.show()
-        }
+
+        else ->
+            AlertDialog.Builder(this@LoginActivity).apply {
+                setTitle("Unable To Login")
+                setMessage(authorisation.errorResponse?:"Generic Error Message")
+            }.show()
     }
+
 }

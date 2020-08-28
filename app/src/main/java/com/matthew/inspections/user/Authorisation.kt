@@ -11,9 +11,10 @@ data class User(
 )
 
 data class Authorisation(
-    val authorised: Boolean,
-    val validationDate: String?,
-    val expiryDate: String?,
-    val token: String?,
-    val errorResponse: String?
+    val authorised: Boolean = false,
+    val userId: Int = 0,
+    val validationDate: String? = null,
+    val expiryDate: String? = null,
+    val token: String? = null,
+    val errorResponse: String? = null
 )

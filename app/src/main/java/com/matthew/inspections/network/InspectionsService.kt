@@ -2,10 +2,7 @@ package com.matthew.inspections.network
 
 import com.matthew.inspections.network.model.InspectionResponse
 import com.matthew.inspections.user.Authorisation
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface InspectionsService {
@@ -19,10 +16,11 @@ interface InspectionsService {
     /**
      * Authenticate the user for login
      */
+    @Multipart
     @POST(AUTHORISATION_ROUTE)
     suspend fun authorise(
-        @Body userName: String,
-        @Body password: String
+        @Part("username") username: String,
+        @Part("password") password: String
     ): Authorisation
 
     /**

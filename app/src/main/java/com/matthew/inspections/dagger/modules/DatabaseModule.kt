@@ -1,4 +1,4 @@
-package com.matthew.inspections.dagger
+package com.matthew.inspections.dagger.modules
 
 import android.content.Context
 import androidx.room.Room

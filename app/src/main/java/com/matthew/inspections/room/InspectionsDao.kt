@@ -1,13 +1,24 @@
 package com.matthew.inspections.room
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.matthew.inspections.room.data.InspectionWithQuestions
+import com.matthew.inspections.room.data.LocalAuthorisation
 import com.matthew.inspections.room.data.QuestionWithAnswers
 
 @Dao
 interface InspectionsDao {
+
+    @Query("SELECT * FROM authentication WHERE userId = :userId")
+    fun has(userId: Int): LocalAuthorisation?
+
+    @Query("SELECT * FROM authentication WHERE username = :username")
+    fun hasUsername(username: String): LocalAuthorisation?
+
+    @Update
+    fun update(authorisation: LocalAuthorisation?)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(authorisation: LocalAuthorisation)
 
     @Transaction
     @Query("SELECT * FROM inspection")
