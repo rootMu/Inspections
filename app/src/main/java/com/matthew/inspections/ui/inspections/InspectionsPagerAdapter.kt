@@ -10,6 +10,11 @@ class InspectionsPagerAdapter(activity: AppCompatActivity) :
 
     override fun getItemCount() = 3
 
+    /**
+     * 0 = Past
+     * 1 = Current
+     * 2 = Future
+     */
     override fun createFragment(position: Int): Fragment {
         return InspectionsListFragment.getInstance(position)
     }

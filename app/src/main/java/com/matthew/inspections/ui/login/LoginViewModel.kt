@@ -9,7 +9,7 @@ import com.matthew.inspections.user.Authorisation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel @ViewModelInject constructor(private var repository: AuthenticationRepository) :
+class LoginViewModel @ViewModelInject constructor(private val repository: AuthenticationRepository) :
     ViewModel() {
 
     companion object {

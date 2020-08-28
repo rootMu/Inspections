@@ -8,7 +8,9 @@ import com.matthew.inspections.R
 import com.matthew.inspections.databinding.ActivityInspectionsBinding
 import com.matthew.inspections.ui.inspectionDetail.InspectionDetailActivity
 import com.matthew.inspections.ui.inspectionDetail.InspectionDetailViewModel.Companion.INSPECTION_ID
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InspectionsActivity : AppCompatActivity()  {
 
     private lateinit var binding: ActivityInspectionsBinding

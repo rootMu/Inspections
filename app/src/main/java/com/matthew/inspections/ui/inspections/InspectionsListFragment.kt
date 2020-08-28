@@ -10,16 +10,19 @@ import com.matthew.inspections.databinding.FragmentInspectionsListBinding
 import com.matthew.inspections.ui.inspections.viewmodel.InspectionsViewModel
 import com.matthew.inspections.util.autoCleared
 import androidx.lifecycle.Observer
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InspectionsListFragment : Fragment() {
 
     companion object {
-        const val ARG_POSITION = "position"
+        const val ARG_STATUS = "status"
 
-        fun getInstance(position: Int): Fragment {
+        fun getInstance(status: Int): Fragment {
             return InspectionsListFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_POSITION, position)
+                    putInt(ARG_STATUS, status)
                 }
             }
         }
@@ -33,7 +36,7 @@ class InspectionsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInspectionsListBinding.inflate(inflater, container, false)
-        binding.position = arguments?.getInt(ARG_POSITION,0)!!
+        binding.status = arguments?.getInt(ARG_STATUS,0)!!
         binding.viewModel = viewModel.apply{
             launchDetailActivity.observe(viewLifecycleOwner, Observer { value -> (activity as InspectionsActivity).launchDetailActivity(value) })
         }

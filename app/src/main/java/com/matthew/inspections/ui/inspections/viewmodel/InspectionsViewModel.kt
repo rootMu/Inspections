@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.matthew.inspections.data.inspections.InspectionsRepository
 import com.matthew.inspections.room.data.Inspection
 import com.matthew.inspections.room.data.InspectionWithQuestions
 import com.matthew.inspections.room.data.Question
@@ -13,7 +14,7 @@ import com.matthew.inspections.ui.inspections.uiModel.UiInspection
 import com.matthew.inspections.ui.inspections.uiModel.UiTitle
 import java.util.*
 
-class InspectionsViewModel @ViewModelInject constructor() : ViewModel(),
+class InspectionsViewModel @ViewModelInject constructor(private val repository: InspectionsRepository) : ViewModel(),
     InspectionsAdapter.InspectionListener {
 
     companion object {
@@ -28,8 +29,19 @@ class InspectionsViewModel @ViewModelInject constructor() : ViewModel(),
     val launchDetailActivity get() = _launchDetailActivity
 
     //TODO() retrieve List of InspectionWithQuestions from Database depending on status
-    fun getInspectionsUiData(position: Int) = liveData {
+    fun getInspectionsUiData(status: Int) = liveData {
         val list = mutableListOf<InspectionUiModel>()
+
+        val data = repository.getAllInspections(status)
+        data.groupBy { it.inspection.areaId }.forEach {
+            val area = TEMP_AREAS[it.key]
+            list.add(UiTitle(area))
+            it.value.map { inspection ->
+                list.add(inspection.mapToUi())
+            }
+        }
+
+
         /**
          * Split list by areaId
          */
