@@ -1,7 +1,16 @@
 # Inspections
 Inspections Application featuring offline working
 
-TODO()
+Current TODO() -- setup network calls (with mock responses)
+                -- use retrieved data to save into database
+
+               -- read from database
+    
+               -- edit current records and save
+    
+               -- "submit" current records, updating status to completed (possible error states with offline overlap)
+    
+               -- create offline handler                                  
 
 <<Screens>>
 ============
@@ -12,7 +21,7 @@ Login Screen
   <<Functionality>>
   Login
 
-=======================  
+=======================
 Inspections list Screen
 =======================
   view Pager

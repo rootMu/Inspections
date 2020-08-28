@@ -40,7 +40,7 @@
                     android:id="@+id/completeBy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{inspection.completeBy.toString()}" />
+                    android:text="@{inspection.date.toString()}" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
