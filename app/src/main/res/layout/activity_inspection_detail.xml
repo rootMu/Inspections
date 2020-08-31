@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.matthew.inspections.ui.inspectionDetail.InspectionDetailViewModel" />
+            type="com.matthew.inspections.ui.inspectionDetail.viewmodel.InspectionDetailViewModel" />
 
     </data>
 
@@ -16,6 +16,37 @@
         android:layout_height="match_parent"
         tools:context=".ui.inspectionDetail.InspectionDetailActivity">
 
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:onClick="@{() -> saveButton.setEnabled(false) + editButton.setEnabled(true) }"
+            app:isSavable="@{viewModel.inspectionStatus}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/submit_button"/>
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:onClick="@{() -> editButton.setEnabled(false) + saveButton.setEnabled(true) }"
+            app:isEditable="@{viewModel.inspectionStatus}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/save_button"/>
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:onClick="@{() -> viewModel.submit() }"
+            app:isSubmitable="@{viewModel.inspectionStatus}"
+            app:isSubmitVisible="@{viewModel.answers}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -23,7 +54,7 @@
             android:text="@{viewModel.inspectionName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/edit_button" />
 
         <ScrollView
             android:layout_width="0dp"

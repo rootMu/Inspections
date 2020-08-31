@@ -4,6 +4,18 @@
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="not_applicable">Not Applicable</string>
+    <string name="search">Search by name or id…</string>
+    <string name="search_by_name">Search by Inspection Name</string>
+    <string name="search_by_id">Search by Inspection Id</string>
+    <string name="search_by_type">Search by Inspection Type</string>
+    <string name="search_by_area">Search by Inspection Area</string>
+    <string name="sort_by_area">Sort by Inspection Area</string>
+    <string name="sort_by_type">Sort by Inspection Type</string>
+    <string name="filter_info">Showing Inspections Sorted by %1$s</string>
+    <string name="filter_search_info">%1$s and Searching using %2$s</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="submit">Submit</string>
 
     <plurals name="questions">
         <item quantity="one">>%1$d Question</item>

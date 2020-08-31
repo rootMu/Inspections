@@ -1,15 +1,28 @@
 package com.matthew.inspections.ui.login
 
+import android.app.job.JobScheduler
+import android.content.Context
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.firebase.jobdispatcher.*
 import com.matthew.inspections.data.login.AuthenticationRepository
 import com.matthew.inspections.room.data.LocalAuthorisation
 import com.matthew.inspections.room.data.update
 import com.matthew.inspections.user.Authorisation
+import com.matthew.inspections.util.ConnectivityJob
+import com.matthew.inspections.util.NetworkReceiver
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel @ViewModelInject constructor(private val repository: AuthenticationRepository) :
+
+class LoginViewModel @ViewModelInject constructor(
+    private val repository: AuthenticationRepository,
+    @ApplicationContext private var context: Context
+) :
     ViewModel() {
 
     companion object {
