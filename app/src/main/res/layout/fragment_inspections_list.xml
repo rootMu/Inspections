@@ -10,24 +10,84 @@
             type="com.matthew.inspections.ui.inspections.viewmodel.InspectionsViewModel" />
 
         <variable
-            name="position"
-            type="int" />
+            name="onQueryTextListener"
+            type="androidx.appcompat.widget.SearchView.OnQueryTextListener"/>
+
+        <import type="android.view.View"/>
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.inspections.InspectionsActivity">
+        tools:context=".ui.inspections.InspectionsActivity"
+        android:layout_margin="5dp">
+
+        <androidx.appcompat.widget.SearchView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/search_by"
+            android:id="@+id/search"
+            android:queryHint="@string/search"
+            android:iconifiedByDefault="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:OnQueryTextListener="@{onQueryTextListener}" />
+
+        <Spinner
+            android:id="@+id/sort_by"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/search"
+            app:layout_constraintBottom_toBottomOf="@id/search"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@android:drawable/ic_menu_agenda"/>
+
+        <Spinner
+            android:id="@+id/search_by"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/search"
+            app:layout_constraintBottom_toBottomOf="@id/search"
+            app:layout_constraintEnd_toStartOf="@id/sort_by"
+            android:visibility="@{viewModel.searchSpinnerVisibility ? View.VISIBLE : View.GONE}"
+            android:src="@android:drawable/ic_menu_save"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:adapter="@{viewModel.adapter}"
+            android:layout_marginTop="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:submitInspectionList="@{viewModel.getInspectionsUiData(position)}" />
+            app:submitInspectionList="@{viewModel.inspectionsLiveData}"
+            app:layout_constraintTop_toBottomOf="@id/search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/search_info"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/search_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="italic"
+            android:text="@{String.format(@string/filter_info, viewModel.searchSpinnerVisibility ? String.format(@string/filter_search_info, viewModel.filter, viewModel.search) : viewModel.filter)}"/>
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/list"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}"
+            android:src="@drawable/inspect"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

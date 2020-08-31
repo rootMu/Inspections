@@ -7,12 +7,12 @@ import androidx.annotation.NonNull
 import com.matthew.inspections.dagger.qualifier.ForDatabase
 import com.matthew.inspections.network.InspectionsService
 import com.matthew.inspections.room.InspectionsDao
-import com.matthew.inspections.room.converters.OffsetDateTimeConverter
+import com.matthew.inspections.room.converters.LocalDateTimeConverter
 import com.matthew.inspections.room.data.LocalAuthorisation
 import com.matthew.inspections.room.data.update
 import com.matthew.inspections.user.Authorisation
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.time.OffsetDateTime
+import java.time.LocalDateTime
 import java.util.concurrent.Executor
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -53,7 +53,7 @@ class AuthenticationRepository @Inject constructor(
             if(offline){
                 dao.hasUsername(username)?.let {
                     when {
-                        it.expiryDate == null || it.expiryDate!!.isBefore(OffsetDateTime.now()) ->
+                        it.expiryDate == null || it.expiryDate!!.isBefore(LocalDateTime.now()) ->
                             throw AuthenticationExpiredException("Your authentication has expired")
                         it.password != password -> throw InvalidUserNameOrPasswordException("Your password is incorrect")
                         else -> authorised = true
@@ -77,14 +77,14 @@ class AuthenticationRepository @Inject constructor(
              */
 
             if (Random.nextBoolean() || authorised) {
-                val dateNow = OffsetDateTime.now()
+                val dateNow = LocalDateTime.now()
                 val dateThen = dateNow.plusDays(7)
-                val converter = OffsetDateTimeConverter()
+                val converter = LocalDateTimeConverter()
                 Authorisation(
                     true,
                     12345,//Random.nextInt()
-                    converter.fromOffsetTime(dateNow),
-                    converter.fromOffsetTime(dateThen),
+                    converter.fromLocalDateTime(dateNow),
+                    converter.fromLocalDateTime(dateThen),
                     RANDOM_MD5
                 )
             } else {

@@ -2,6 +2,8 @@ package com.matthew.inspections.ui.inspectionDetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,7 +14,7 @@ import com.matthew.inspections.ui.inspectionDetail.uiModel.UiAnswer
 import com.matthew.inspections.ui.inspectionDetail.uiModel.UiQuestion
 import com.matthew.inspections.ui.inspections.BaseViewHolder
 
-class InspectionDetailAdapter :
+class InspectionDetailAdapter(var listener: InspectionDetailListener) :
     ListAdapter<InspectionDetailUiModel, BaseViewHolder<*>>(DiffCallback()) {
 
     companion object {
@@ -20,8 +22,8 @@ class InspectionDetailAdapter :
         private const val TYPE_ANSWER = 1
     }
 
-    interface InspectionListener {
-        fun onClickedInspection(inspectionId: Int)
+    interface InspectionDetailListener {
+        fun onValueEntered(answerId: Int, value: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -76,6 +78,17 @@ class InspectionDetailAdapter :
         BaseViewHolder<UiAnswer>(binding.root) {
         override fun bind(item: UiAnswer) {
             binding.answer = item
+            binding.value.doAfterTextChanged {
+                try{
+                    val value = it?.subSequence(0, it.length).toString().toInt()
+                    listener.onValueEntered(item.id, value)
+                }catch(e: Exception){
+                    val exception = e
+                    val bob = exception
+                    //Log exception
+                    //value was not suitable to save so ignore
+                }
+            }
         }
     }
 
